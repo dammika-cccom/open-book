@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { MoveRight, ScrollText } from "lucide-react";
+export const runtime = "edge";
 
 export default function BookIndexPage() {
   return (

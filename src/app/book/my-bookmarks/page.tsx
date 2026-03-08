@@ -8,7 +8,8 @@ import { db } from "@/db";
 import { users } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
-export const runtime = "nodejs";
+//export const runtime = "nodejs";
+export const runtime = "edge";
 
 export default async function MyBookmarksPage() {
   const session = await auth();

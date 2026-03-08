@@ -2,6 +2,7 @@ import Link from "next/link";
 import { AuthButton } from "@/components/layout/AuthButton";
 import { SocialShare } from "@/components/ui/SocialShare";
 import { Scroll, BookOpen, Compass } from "lucide-react"; // Removed Heart
+export const runtime = "edge";
 
 export default function HomePage() {
   return (

@@ -1,6 +1,7 @@
 import { getAllVerses } from "@/lib/queries";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { AuthButton } from "@/components/layout/AuthButton";
+export const runtime = "edge";
 
 export default async function BookLayout({
   children,
