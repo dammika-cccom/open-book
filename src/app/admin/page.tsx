@@ -7,7 +7,8 @@ import { approveContributor, approveComment, deleteComment, toggleUserSuspension
 import { ShieldAlert, Users, MessageCircle, Clock, Filter, Trash2, CheckCircle } from "lucide-react";
 import Link from "next/link";
 
-export const runtime = "nodejs";
+//export const runtime = "nodejs";
+export const runtime = "edge";
 
 interface AdminPageProps {
   searchParams: Promise<{ days?: string }>;

@@ -13,6 +13,7 @@ import { and, eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { MoveLeft } from "lucide-react";
+export const runtime = "edge";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
