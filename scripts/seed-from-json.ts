@@ -5,8 +5,8 @@ import fs from "fs";
 // Load environment variables immediately
 dotenv.config({ path: path.resolve(process.cwd(), ".env.local") });
 
-import { db } from "./index";
-import { verses, footnotes } from "./schema";
+import { db } from "../src/db/index";
+import { verses, footnotes } from "../src/db/schema";
 import { eq } from "drizzle-orm";
 import sanitizeHtml from "sanitize-html";
 

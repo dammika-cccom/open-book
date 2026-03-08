@@ -1,12 +1,22 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Requirement: Enable standalone mode for smaller bundles
+  // Optimization: Standalone mode reduces the output size significantly
   output: 'standalone',
-  // Disable source maps in production to save space
+  
+  // Disable source maps to save code space
   productionBrowserSourceMaps: false,
-  // Ensure lucide icons are optimized
-  transpilePackages: ['lucide-react']
+  
+  // Requirement: Ensure icons are optimized
+  transpilePackages: ['lucide-react'],
+
+  // CRITICAL: Tell the bundler to NEVER include 'pg' or 'dotenv' in the edge worker
+  serverExternalPackages: ['pg', 'dotenv', 'fs', 'path'],
+  
+  experimental: {
+    // This helps Next.js 16 trim unused code
+    optimizePackageImports: ['lucide-react', 'lucide'],
+  },
 };
 
 export default nextConfig;
