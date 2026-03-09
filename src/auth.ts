@@ -17,7 +17,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   // MANDATORY for Cloudflare Pages: Database sessions are not supported on the Edge.
   // We use JWT to keep the session light and encrypted in the cookie.
   session: { strategy: "jwt" }, 
-
+  trustHost: true, // ADD THIS LINE: Tells Auth.js to trust the Cloudflare proxy
   ...authConfig,
   
   callbacks: {
