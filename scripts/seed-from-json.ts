@@ -1,14 +1,16 @@
-import * as dotenv from "dotenv";
-import path from "path";
 import fs from "fs";
-
-// Load environment variables immediately
-dotenv.config({ path: path.resolve(process.cwd(), ".env.local") });
-
+import path from "path";
 import { db } from "../src/db/index";
 import { verses, footnotes } from "../src/db/schema";
 import { eq } from "drizzle-orm";
 import sanitizeHtml from "sanitize-html";
+
+/**
+ * ARCHITECTURAL NOTE:
+ * This script is designed to run LOCALLY. 
+ * We do not import 'dotenv' here to keep the production bundle size under 3MB.
+ * Run this using: npx tsx --env-file=.env.local scripts/seed-from-json.ts
+ */
 
 interface WPPost {
   ID: string;
@@ -27,8 +29,20 @@ interface WPTable {
 
 async function seed() {
   try {
+    // 1. Verify Environment
+    if (!process.env.DATABASE_URL) {
+      throw new Error("❌ DATABASE_URL is not set. Did you forget --env-file=.env.local?");
+    }
+
     console.log("📂 Opening JSON data source...");
-    const filePath = path.join(process.cwd(), "src/db/data/wp_data.json");
+    
+    // Path logic: We are in /scripts, JSON is in /scripts/data/
+    const filePath = path.join(process.cwd(), "scripts/data/wp_data.json");
+    
+    if (!fs.existsSync(filePath)) {
+        throw new Error(`❌ JSON file not found at: ${filePath}`);
+    }
+
     const rawData = fs.readFileSync(filePath, "utf-8");
     const parsed: (WPTable | object)[] = JSON.parse(rawData);
     
@@ -36,12 +50,12 @@ async function seed() {
       'type' in item && item.type === "table" && item.name === "wp_posts"
     );
 
-    if (!wpTable) throw new Error("Could not find wp_posts table");
+    if (!wpTable) throw new Error("❌ Could not find wp_posts table in JSON");
 
     const wpPosts = wpTable.data;
     
-    // --- DEDUPLICATION LOGIC ---
-    // We only want the latest version (highest ID) for each Verse Number
+    // 2. DEDUPLICATION LOGIC
+    // WordPress exports often contain multiple revisions. We only take the LATEST ID per Chapter.
     const uniqueChapters = new Map<number, WPPost>();
 
     wpPosts.forEach((post) => {
@@ -51,7 +65,6 @@ async function seed() {
         
         if (num > 0) {
           const existing = uniqueChapters.get(num);
-          // If this ID is higher than the one we have, replace it
           if (!existing || parseInt(post.ID) > parseInt(existing.ID)) {
             uniqueChapters.set(num, post);
           }
@@ -60,18 +73,18 @@ async function seed() {
     });
 
     const chaptersToProcess = Array.from(uniqueChapters.values());
-    console.log(`🚀 Starting migration of ${chaptersToProcess.length} unique chapters...`);
+    console.log(`🚀 Starting migration of ${chaptersToProcess.length} unique chapters to Neon Cloud...`);
 
     for (const post of chaptersToProcess) {
       const numMatch = post.post_title.match(/\d+/);
       const verseNumber = parseInt(numMatch![0]);
       const forcedSlug = `chapter-${verseNumber}`;
 
-      // 1. Regex Footnotes
+      // 3. Extract Footnotes using Regex
       const footnoteRegex = /\*\((\d+)\)\s?-\s?([^\*<]+)/g;
       const foundFootnotes = [...post.post_content.matchAll(footnoteRegex)];
 
-      // 2. Clean Content
+      // 4. Clean Content (Remove WordPress shortcodes and specific styling)
       let cleanContent = post.post_content.replace(/\[\/?\w+[^\]]*\]/g, "");
       cleanContent = sanitizeHtml(cleanContent, {
         allowedTags: sanitizeHtml.defaults.allowedTags.concat(['h1', 'h2', 'h3', 'table', 'tr', 'td', 'tbody', 'ol', 'ul', 'li', 'strong', 'u', 'p', 'br']),
@@ -81,7 +94,7 @@ async function seed() {
         }
       });
 
-      // 3. Upsert Verse
+      // 5. Upsert Verse into Database
       const [insertedVerse] = await db.insert(verses).values({
         verseNumber: verseNumber,
         title: post.post_title,
@@ -93,9 +106,7 @@ async function seed() {
         set: { contentHtml: cleanContent, title: post.post_title, slug: forcedSlug }
       }).returning();
 
-      // 4. CLEAN & INSERT FOOTNOTES
-      // Crucial: delete existing footnotes for this verse before inserting 
-      // to avoid duplicates from previous runs.
+      // 6. Clean and Re-insert Footnotes to avoid duplicates
       if (insertedVerse) {
         await db.delete(footnotes).where(eq(footnotes.verseId, insertedVerse.id));
         
@@ -107,14 +118,14 @@ async function seed() {
           });
         }
       }
-      console.log(`✅ CHAPTER-${verseNumber} synced cleanly.`);
+      console.log(`✅ Verse ${verseNumber} synced.`);
     }
 
-    console.log("\n⭐ PHASE 3 SUCCESS: Cloud database is now clean and populated.");
+    console.log("\n⭐ SUCCESS: Cloud database is now clean and populated.");
     process.exit(0);
 
   } catch (error) {
-    console.error("❌ ERROR:", error);
+    console.error("❌ SEEDING ERROR:", error);
     process.exit(1);
   }
 }
