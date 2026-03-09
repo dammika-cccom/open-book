@@ -5,24 +5,10 @@ const nextConfig: NextConfig = {
   images: { unoptimized: true },
   productionBrowserSourceMaps: false,
   
-  // Requirement: Block these giants from ever entering the Worker code
-  serverExternalPackages: [
-    'pg', 
-    'dotenv', 
-    'fs', 
-    'path', 
-    'ws', 
-    'sanitize-html', 
-    'lucide-react'
-  ],
+  // Requirement: Prevent heavy Node modules from entering the Cloudflare Worker
+  serverExternalPackages: ['pg', 'dotenv', 'fs', 'path', 'ws', 'sanitize-html'],
 
-  experimental: {
-    // Force the compiler to discard unused code paths
-    optimizePackageImports: [
-      '@neondatabase/serverless',
-      'drizzle-orm'
-    ],
-  }
+  // Note: 'lucide-react' removed from here to fix the build conflict.
 };
 
 export default nextConfig;
