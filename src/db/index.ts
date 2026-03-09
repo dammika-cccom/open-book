@@ -10,20 +10,13 @@
 //});
 
 //export const db = drizzle(pool, { schema });
-
-import { drizzle } from "drizzle-orm/neon-http"; // We changed this to neon-http
+import { drizzle } from "drizzle-orm/neon-http";
 import { neon } from "@neondatabase/serverless";
 import * as schema from "./schema";
 
-const connectionString = process.env.DATABASE_URL;
+const connectionString = process.env.DATABASE_URL!;
 
-if (!connectionString) {
-  throw new Error("❌ DATABASE_URL is missing from environment variables");
-}
-
-// Create the connection client using HTTP
-// This works perfectly on Cloudflare Edge without extra WebSocket config
+// The neon client handles the connection via HTTP, which is very light for the Edge
 const client = neon(connectionString);
 
-// Initialize drizzle with the HTTP client
 export const db = drizzle(client, { schema });

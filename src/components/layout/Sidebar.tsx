@@ -2,10 +2,9 @@
 
 import Link from "next/link";
 import React, { useState, useEffect, useMemo, useDeferredValue } from "react";
-import { SearchIcon, XIcon, MenuIcon } from "../ui/Icons";
 import { useParams } from "next/navigation";
 import dynamic from "next/dynamic";
-import { BookMarkedIcon, LibraryIcon } from "lucide-react";
+import { SearchIcon, XIcon, MenuIcon, BookMarkedIcon, LibraryIcon } from "../ui/Icons";
 
 const LanguageSelector = dynamic(() => import("../ui/LanguageSelector"), { 
   ssr: false,

@@ -1,6 +1,6 @@
 "use client";
 
-import { Share2 } from "lucide-react";
+import { Share2Icon } from "./Icons";
 
 export function SocialShare() {
   const handleShare = () => {
@@ -15,7 +15,7 @@ export function SocialShare() {
         onClick={handleShare} 
         className="text-stone-400 hover:text-green-500 flex items-center gap-2 text-xs uppercase tracking-widest cursor-pointer"
       >
-        <Share2 className="w-4 h-4" /> Share via WhatsApp
+        <Share2Icon className="w-4 h-4" /> Share via WhatsApp
       </button>
     </div>
   );

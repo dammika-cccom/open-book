@@ -1,5 +1,5 @@
 "use client";
-import { ArrowUp, Home } from "lucide-react";
+import { ArrowUpIcon, HomeIcon } from "../ui/Icons";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -19,7 +19,7 @@ export function GlobalTools() {
         className="p-3 bg-charcoal border border-gold/20 rounded-full text-gold hover:bg-gold hover:text-black transition-all shadow-lg"
         title="Back to Home"
       >
-        <Home className="w-5 h-5" />
+        <HomeIcon className="w-5 h-5" />
       </Link>
 
       {showTop && (
@@ -28,7 +28,7 @@ export function GlobalTools() {
           className="p-3 bg-gold text-black rounded-full transition-all shadow-lg animate-in fade-in zoom-in duration-300 cursor-pointer"
           title="Back to Top"
         >
-          <ArrowUp className="w-5 h-5" />
+          <ArrowUpIcon className="w-5 h-5" />
         </button>
       )}
     </div>

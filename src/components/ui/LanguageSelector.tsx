@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Languages } from "lucide-react";
+import { LanguagesIcon } from "./Icons";
 import { usePathname } from "next/navigation";
 
 // Strict Interface for the Google Translate API
@@ -60,7 +60,7 @@ export default function LanguageSelector() {
   return (
     <div className="flex flex-col gap-3 p-1 animate-in fade-in duration-1000" suppressHydrationWarning>
       <div className="flex items-center gap-2 px-1">
-        <Languages className="w-3.5 h-3.5 text-gold/70" />
+        <LanguagesIcon className="w-3.5 h-3.5 text-gold/70" />
         <span className="text-[10px] uppercase tracking-[0.25em] text-stone-500 font-black">
           Global Reading Mode
         </span>

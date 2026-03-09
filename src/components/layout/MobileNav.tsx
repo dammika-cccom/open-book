@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronLeft, ChevronRight, List } from "lucide-react";
+import { ChevronLeftIcon, ChevronRightIcon, ListIcon } from "../ui/Icons";
 import Link from "next/link";
 
 interface MobileNavProps {
@@ -20,7 +20,7 @@ export function MobileNav({ currentNumber }: MobileNavProps) {
           className="text-gold p-2 hover:bg-gold/10 rounded-full transition-colors"
           aria-label="Previous Verse"
         >
-          <ChevronLeft className="w-6 h-6" />
+          <ChevronLeftIcon className="w-6 h-6" />
         </Link>
       ) : (
         <div className="w-10" />
@@ -29,7 +29,7 @@ export function MobileNav({ currentNumber }: MobileNavProps) {
       {/* Middle Info & Menu Trigger */}
       <div className="flex flex-col items-center gap-1">
         <div className="flex items-center gap-2 text-gold">
-          <List className="w-4 h-4 opacity-50" /> {/* Now using the List icon */}
+          <ListIcon className="w-4 h-4 opacity-50" /> {/* Now using the List icon */}
           <span className="text-[10px] uppercase tracking-[0.2em] font-bold">
             Verse {currentNumber} / 50
           </span>
@@ -43,7 +43,7 @@ export function MobileNav({ currentNumber }: MobileNavProps) {
           className="text-gold p-2 hover:bg-gold/10 rounded-full transition-colors"
           aria-label="Next Verse"
         >
-          <ChevronRight className="w-6 h-6" />
+          <ChevronRightIcon className="w-6 h-6" />
         </Link>
       ) : (
         <div className="w-10" />

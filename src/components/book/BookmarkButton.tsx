@@ -1,5 +1,5 @@
 "use client";
-import { Bookmark } from "lucide-react";
+import { BookMarkedIcon} from "../ui/Icons";
 import { toggleBookmark } from "@/lib/actions";
 import { useTransition } from "react";
 
@@ -16,7 +16,7 @@ export function BookmarkButton({ verseId, isBookmarked }: { verseId: string, isB
           : "border-gold/30 text-gold hover:bg-gold/10"
       }`}
     >
-      <Bookmark className={`w-4 h-4 ${isBookmarked ? "fill-current" : ""}`} />
+      <BookMarkedIcon className={`w-4 h-4 ${isBookmarked ? "fill-current" : ""}`} />
       <span className="text-xs font-bold uppercase tracking-widest">
         {isBookmarked ? "Saved to Bookmarks" : "Bookmark Verse"}
       </span>

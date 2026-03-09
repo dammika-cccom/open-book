@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { MoveRight, ScrollText } from "lucide-react";
+import { MoveRightIcon, ScrollTextIcon } from "@/components/ui/Icons";
 export const runtime = "edge";
 
 export default function BookIndexPage() {
   return (
     <div className="max-w-2xl mx-auto py-12 lg:py-20 animate-in fade-in slide-in-from-bottom-8 duration-1000">
       <div className="text-center space-y-8">
-        <ScrollText className="w-12 h-12 text-gold/20 mx-auto" />
+        <ScrollTextIcon className="w-12 h-12 text-gold/20 mx-auto" />
         
         <header className="space-y-4">
           <h2 className="text-stone-500 uppercase tracking-[0.4em] text-xs">The Digital Manuscript</h2>
@@ -31,7 +31,7 @@ export default function BookIndexPage() {
             className="flex items-center gap-4 bg-gold text-black px-10 py-4 font-bold uppercase tracking-widest text-xs hover:bg-white transition-all group"
           >
             Start with Verse 01
-            <MoveRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
+            <MoveRightIcon className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
           </Link>
           
           <p className="text-[10px] text-stone-600 uppercase tracking-widest">

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Camera, Maximize2 } from "lucide-react";
+import { CameraIcon, Maximize2Icon } from "../ui/Icons";
 import Image from "next/image";
 
 interface GalleryImage {
@@ -44,7 +44,7 @@ export function HeritageGallery() {
   return (
     <section className="mt-32 space-y-16 border-t border-gold/10 pt-20">
       <div className="flex flex-col items-center gap-4 text-center">
-        <Camera className="w-6 h-6 text-gold/30" />
+        <CameraIcon className="w-6 h-6 text-gold/30" />
         <h2 className="text-[11px] uppercase tracking-[0.5em] text-gold font-black">
           The Heritage Archive
         </h2>
@@ -77,7 +77,7 @@ export function HeritageGallery() {
                 {/* Modern Interaction: The Maximize Icon */}
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 bg-gold/5 backdrop-blur-[2px]">
                    <div className="p-3 border border-gold/50 rounded-full bg-obsidian/80 text-gold shadow-2xl">
-                      <Maximize2 className="w-5 h-5" /> 
+                      <Maximize2Icon className="w-5 h-5" /> 
                    </div>
                 </div>
 
