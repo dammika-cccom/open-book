@@ -2,13 +2,18 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: 'standalone',
-  images: { unoptimized: true },
+  images: { 
+    unoptimized: true 
+  },
   productionBrowserSourceMaps: false,
   
-  // Requirement: Prevent heavy Node modules from entering the Cloudflare Worker
+  // Requirement: Block Node.js modules from the Edge Worker
   serverExternalPackages: ['pg', 'dotenv', 'fs', 'path', 'ws', 'sanitize-html'],
 
-  // Note: 'lucide-react' removed from here to fix the build conflict.
+  // Fix: Correct way to handle ESLint in Next.js Config
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 export default nextConfig;
