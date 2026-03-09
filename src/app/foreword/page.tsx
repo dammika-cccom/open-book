@@ -1,12 +1,16 @@
 import Link from "next/link";
-import { MoveLeft, MoveRight, Quote } from "lucide-react";
+import { 
+  MoveLeftIcon, 
+  MoveRightIcon, 
+  QuoteIcon 
+} from "@/components/ui/Icons";
 
 export default function ForewordPage() {
   return (
     <main className="min-h-screen bg-obsidian py-12 md:py-20 px-6">
       <div className="max-w-3xl mx-auto space-y-12 animate-in fade-in duration-1000">
         <Link href="/" className="text-gold text-[10px] uppercase tracking-[0.3em] flex items-center gap-2 hover:opacity-70 transition-all border border-gold/10 w-fit px-4 py-2 rounded-full bg-white/5">
-          <MoveLeft className="w-3 h-3" /> Back to Home
+          <MoveLeftIcon className="w-3 h-3" /> Back to Home
         </Link>
         
         <header className="text-center space-y-4">
@@ -15,7 +19,7 @@ export default function ForewordPage() {
         </header>
 
         <section className="relative group">
-          <Quote className="absolute -top-8 -left-8 w-16 h-16 text-gold/5 rotate-12" />
+          <QuoteIcon className="absolute -top-8 -left-8 w-16 h-16 text-gold/5 rotate-12" />
           <div className="verse-content italic border-l border-gold/20 pl-8 text-stone-300 space-y-6 text-justify leading-loose">
             <p>
               My father Dr S. P. de Silva born in Sri Lanka in 1931 he was educated at trinity college kandy and excelled in all sports and was head prefect and vice captain cricket. He graduated from the Colombo medical college and after internship proceeded to England. 
@@ -39,7 +43,7 @@ export default function ForewordPage() {
 
         <div className="flex justify-center pt-10">
           <Link href="/book/chapter-1" className="bg-gold text-black px-12 py-4 font-bold uppercase tracking-[0.2em] text-[11px] flex items-center gap-4 hover:bg-white transition-all shadow-[0_0_30px_rgba(212,175,55,0.2)] active:scale-95">
-            Begin the 50 Verses <MoveRight className="w-4 h-4" />
+            Begin the 50 Verses <MoveRightIcon className="w-4 h-4" />
           </Link>
         </div>
       </div>

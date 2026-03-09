@@ -18,12 +18,10 @@
     "drizzle-orm": "^0.45.1",
     "esbuild": "^0.27.3",
     "framer-motion": "^12.34.4",
-    "lucide-react": "^0.576.0",
     "next": "16.1.6",
     "next-auth": "^5.0.0-beta.30",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "sanitize-html": "^2.17.1",
     "tailwind-merge": "^3.5.0",
     "tailwindcss-animate": "^1.0.7",
     "ws": "^8.19.0"
@@ -40,7 +38,9 @@
     "drizzle-kit": "^0.31.9",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
+    "lucide-react": "^0.577.0",
     "pg": "^8.20.0",
+    "sanitize-html": "^2.17.1",
     "tailwindcss": "^4",
     "tsx": "^4.21.0",
     "typescript": "^5"

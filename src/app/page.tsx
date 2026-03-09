@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { AuthButton } from "@/components/layout/AuthButton";
 import { SocialShare } from "@/components/ui/SocialShare";
-import { Scroll, BookOpen, Compass } from "lucide-react"; // Removed Heart
+import { ScrollIcon, BookOpenIcon, CompassIcon } from "@/components/ui/Icons"; 
 export const runtime = "edge";
 
 export default function HomePage() {
@@ -40,7 +40,7 @@ export default function HomePage() {
       {/* Requirement #7: Summarized Overview Blocks */}
       <div className="relative z-10 grid md:grid-cols-3 gap-6 max-w-6xl mx-auto px-6 mb-20">
         <div className="p-8 bg-white/2 border border-white/10 rounded-2xl hover:border-gold/30 transition-all duration-500 group">
-          <Scroll className="w-6 h-6 text-gold/40 mb-6 group-hover:text-gold transition-colors" />
+          <ScrollIcon className="w-6 h-6 text-gold/40 mb-6 group-hover:text-gold transition-colors" />
           <h3 className="text-gold font-serif text-xl mb-3">Scientific Rationalization</h3>
           <p className="text-stone-500 text-sm leading-[1.8] text-justify">
             A meticulous breakdown of Buddhist philosophy using logical deduction and empirical observation, removing the shroud of mysticism.
@@ -48,7 +48,7 @@ export default function HomePage() {
         </div>
 
         <div className="p-8 bg-white/2 border border-white/10 rounded-2xl hover:border-gold/30 transition-all duration-500 group">
-          <BookOpen className="w-6 h-6 text-gold/40 mb-6 group-hover:text-gold transition-colors" />
+          <BookOpenIcon className="w-6 h-6 text-gold/40 mb-6 group-hover:text-gold transition-colors" />
           <h3 className="text-gold font-serif text-xl mb-3">50 Verses of Insight</h3>
           <p className="text-stone-500 text-sm leading-[1.8] text-justify">
             Dr. S. P. de Silva&apos;s life work condensed into a sequential path of 50 verses covering the mind, matter, and cosmic evolution.
@@ -56,7 +56,7 @@ export default function HomePage() {
         </div>
 
         <div className="p-8 bg-white/2 border border-white/10 rounded-2xl hover:border-gold/30 transition-all duration-500 group">
-          <Compass className="w-6 h-6 text-gold/40 mb-6 group-hover:text-gold transition-colors" />
+          <CompassIcon className="w-6 h-6 text-gold/40 mb-6 group-hover:text-gold transition-colors" />
           <h3 className="text-gold font-serif text-xl mb-3">Knowledge Base</h3>
           <p className="text-stone-500 text-sm leading-[1.8] text-justify">
             An interactive platform where readers and contributors build a comprehensive understanding of existence for future generations.

@@ -1,6 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
-import { MoveLeft, Quote, Share2, Award, Calendar } from "lucide-react";
+import { 
+  MoveLeftIcon, 
+  QuoteIcon, 
+  Share2Icon, 
+  AwardIcon, 
+  CalendarIcon 
+} from "@/components/ui/Icons";
 import { HeritageGallery } from "@/components/book/HeritageGallery";
 import { IPProtector } from "@/components/book/IPProtector";
 import { SocialShare } from "@/components/ui/SocialShare";
@@ -32,7 +38,7 @@ export default function AuthorPage() {
 
         <div className="max-w-5xl mx-auto px-6 -mt-6 relative z-20">
           <Link href="/" className="inline-flex items-center text-gold text-[10px] uppercase tracking-[0.3em] hover:text-white mb-20 transition-all border border-gold/20 px-6 py-2.5 rounded-full bg-obsidian shadow-2xl">
-            <MoveLeft className="mr-3 w-3.5 h-3.5" /> Library Home
+            <MoveLeftIcon className="mr-3 w-3.5 h-3.5" /> Library Home
           </Link>
 
           <div className="grid lg:grid-cols-[1fr_1.8fr] gap-12 lg:gap-24 items-start">
@@ -45,21 +51,21 @@ export default function AuthorPage() {
 
               <div className="space-y-8">
                 <div className="flex items-start gap-4 group">
-                  <Award className="w-5 h-5 text-gold/40 mt-1" />
+                  <AwardIcon className="w-5 h-5 text-gold/40 mt-1" />
                   <div>
                     <h3 className="text-stone-300 text-xs uppercase tracking-widest font-bold mb-1">Medical Consultant</h3>
                     <p className="text-stone-500 text-xs leading-relaxed italic">Guys Hospital London, 1960s</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4 group">
-                  <Calendar className="w-5 h-5 text-gold/40 mt-1" />
+                  <CalendarIcon className="w-5 h-5 text-gold/40 mt-1" />
                   <div>
                     <h3 className="text-stone-300 text-xs uppercase tracking-widest font-bold mb-1">Inquiry Period</h3>
                     <p className="text-stone-500 text-xs leading-relaxed italic">39 Years in Pursuit of Truth</p>
                   </div>
                 </div>
                 <button className="flex items-center gap-3 text-gold/60 hover:text-gold transition-colors text-[10px] uppercase tracking-[0.2em] pt-4 cursor-pointer">
-                  <Share2 className="w-4 h-4" /> Share Biography
+                  <Share2Icon className="w-4 h-4" /> Share Biography
                 </button>
               </div>
             </aside>
@@ -67,7 +73,7 @@ export default function AuthorPage() {
             {/* Requirement #5: Professional Justified Content */}
             <section className="space-y-12">
               <div className="relative p-10 bg-white/2 border border-white/5 rounded-2xl shadow-inner">
-                <Quote className="absolute -top-4 -left-4 w-10 h-10 text-gold/10" />
+                <QuoteIcon className="absolute -top-4 -left-4 w-10 h-10 text-gold/10" />
                 <p className="text-xl md:text-2xl font-serif text-stone-300 italic leading-[1.8] text-justify tracking-wide">
                   &quot;The truth being the understanding of the true nature of things. 
                   This is a scientific rationalization of Buddhism.&quot;

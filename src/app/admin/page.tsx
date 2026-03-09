@@ -4,7 +4,15 @@ import { users, comments, verses } from "@/db/schema";
 import { eq, desc, gte } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { approveContributor, approveComment, deleteComment, toggleUserSuspension } from "@/lib/actions";
-import { ShieldAlert, Users, MessageCircle, Clock, Filter, Trash2, CheckCircle } from "lucide-react";
+import { 
+  ShieldAlertIcon, 
+  UsersIcon, 
+  MessageCircleIcon, 
+  ClockIcon, 
+  FilterIcon, 
+  Trash2Icon, 
+  CheckCircleIcon 
+} from "@/components/ui/Icons";
 import Link from "next/link";
 
 
@@ -65,7 +73,7 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
           
           <div className="flex items-center gap-2 bg-charcoal/80 p-1 rounded-lg border border-gold/10 shadow-inner">
             <span className="px-3 text-[9px] uppercase tracking-widest text-stone-600 font-bold flex items-center gap-1">
-              <Filter className="w-3 h-3" /> Timeframe:
+              <FilterIcon className="w-3 h-3" /> Timeframe:
             </span>
             {[
               { label: 'All History', val: '' },
@@ -88,22 +96,22 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
         {/* Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="bg-charcoal/40 border border-gold/5 p-6 rounded-xl hover:bg-white/2 transition-colors">
-            <Users className="w-4 h-4 text-gold/40 mb-3" />
+            <UsersIcon className="w-4 h-4 text-gold/40 mb-3" />
             <p className="text-[10px] uppercase text-stone-600 font-black">Total Members</p>
             <p className="text-2xl font-mono text-stone-200">{allUsers.length}</p>
           </div>
           <div className="bg-charcoal/40 border border-gold/5 p-6 rounded-xl hover:bg-white/2 transition-colors">
-            <ShieldAlert className={`w-4 h-4 mb-3 ${pendingUpgrades.length > 0 ? "text-blue-400 animate-pulse" : "text-stone-800"}`} />
+            <ShieldAlertIcon className={`w-4 h-4 mb-3 ${pendingUpgrades.length > 0 ? "text-blue-400 animate-pulse" : "text-stone-800"}`} />
             <p className="text-[10px] uppercase text-stone-600 font-black">Role Requests</p>
             <p className="text-2xl font-mono text-stone-200">{pendingUpgrades.length}</p>
           </div>
           <div className="bg-charcoal/40 border border-gold/5 p-6 rounded-xl hover:bg-white/2 transition-colors">
-            <MessageCircle className={`w-4 h-4 mb-3 ${pendingCommentsCount > 0 ? "text-gold animate-bounce" : "text-stone-800"}`} />
+            <MessageCircleIcon className={`w-4 h-4 mb-3 ${pendingCommentsCount > 0 ? "text-gold animate-bounce" : "text-stone-800"}`} />
             <p className="text-[10px] uppercase text-stone-600 font-black">Pending Approval</p>
             <p className="text-2xl font-mono text-gold">{pendingCommentsCount}</p>
           </div>
           <div className="bg-charcoal/40 border border-gold/5 p-6 rounded-xl">
-            <Clock className="w-4 h-4 text-stone-800 mb-3" />
+            <ClockIcon className="w-4 h-4 text-stone-800 mb-3" />
             <p className="text-[10px] uppercase text-stone-600 font-black">Active Scope</p>
             <p className="text-xs font-bold text-stone-400 uppercase">{days ? `${days} Day Filter` : "Entire Archive"}</p>
           </div>
@@ -184,13 +192,13 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
                       {!c.isApproved && (
                         <form action={approveComment.bind(null, c.id)} className="w-full">
                           <button type="submit" className="w-full flex items-center justify-center gap-2 text-[10px] text-white bg-green-800 px-6 py-2.5 rounded-sm font-bold uppercase tracking-widest hover:bg-green-700 transition-all cursor-pointer">
-                             <CheckCircle className="w-3 h-3" /> Approve
+                             <CheckCircleIcon className="w-3 h-3" /> Approve
                           </button>
                         </form>
                       )}
                       <form action={deleteComment.bind(null, c.id)} className="w-full">
                         <button type="submit" className="w-full flex items-center justify-center gap-2 text-[10px] text-stone-500 hover:text-red-500 px-6 py-2.5 rounded border border-white/5 font-bold uppercase tracking-widest transition-all cursor-pointer">
-                           <Trash2 className="w-3 h-3" /> Discard
+                           <Trash2Icon className="w-3 h-3" /> Discard
                         </button>
                       </form>
                     </div>

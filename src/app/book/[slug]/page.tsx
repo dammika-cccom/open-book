@@ -12,7 +12,7 @@ import { bookmarks } from "@/db/schema";
 import { and, eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { MoveLeft } from "lucide-react";
+import {MoveLeftIcon, } from "@/components/ui/Icons";
 export const runtime = "edge";
 
 interface PageProps {
@@ -41,7 +41,7 @@ export default async function VersePage({ params }: PageProps) {
       {/* 1. TOP ACTION BAR (Moved OUTSIDE IPProtector to prevent hydration errors) */}
       <div className="flex justify-between items-center mb-12 border-b border-gold/10 pb-6" suppressHydrationWarning>
         <Link href="/foreword" className="flex items-center gap-2 text-[10px] text-stone-500 uppercase tracking-widest hover:text-gold transition-colors">
-          <MoveLeft className="w-3 h-3" /> Foreword
+          <MoveLeftIcon className="w-3 h-3" /> Foreword
         </Link>
         
         <div suppressHydrationWarning>

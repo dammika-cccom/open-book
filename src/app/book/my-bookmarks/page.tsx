@@ -2,7 +2,15 @@ import { auth } from "@/auth";
 import { getUserBookmarks, getUserComments } from "@/lib/queries";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { BookMarked, MessageSquare, Calendar, Trash2, ShieldCheck, Trophy, AlertCircle } from "lucide-react";
+import { 
+  BookMarkedIcon, 
+  MessageSquareIcon, 
+  CalendarIcon, 
+  Trash2Icon, 
+  ShieldCheckIcon, 
+  TrophyIcon, 
+  AlertCircleIcon 
+} from "@/components/ui/Icons";
 import { requestUpgrade, removeBookmark, deleteUserComment, handleSignOut } from "@/lib/actions";
 import { db } from "@/db";
 import { users } from "@/db/schema";
@@ -23,7 +31,7 @@ export default async function MyBookmarksPage() {
   if (!userData) {
     return (
       <div className="max-w-md mx-auto py-20 px-6 text-center space-y-4 font-serif">
-        <AlertCircle className="w-12 h-12 text-gold/40 mx-auto" />
+        <AlertCircleIcon className="w-12 h-12 text-gold/40 mx-auto" />
         <h2 className="text-xl text-gold">Identity Out of Sync</h2>
         <p className="text-stone-500 text-sm">Please refresh your session to register in this database.</p>
         <form action={handleSignOut}>
@@ -37,9 +45,9 @@ export default async function MyBookmarksPage() {
   const myComments = await getUserComments(session.user.id);
 
   const stats = [
-    { label: "Saved", value: savedVerses.length, icon: BookMarked },
-    { label: "Reflections", value: myComments.length, icon: MessageSquare },
-    { label: "Level", value: userData.role, icon: ShieldCheck },
+    { label: "Saved", value: savedVerses.length, icon: BookMarkedIcon },
+    { label: "Reflections", value: myComments.length, icon: MessageSquareIcon },
+    { label: "Level", value: userData.role, icon: ShieldCheckIcon },
   ];
 
   return (
@@ -68,13 +76,13 @@ export default async function MyBookmarksPage() {
               <div className="flex justify-between items-start">
                 <Link href={`/book/${v.slug}`} className="flex-1">
                   <p className="text-[9px] text-stone-600 font-mono mb-1 uppercase flex items-center gap-2">
-                    <Calendar className="w-3 h-3" /> Saved {v.savedAt?.toLocaleDateString()}
+                    <CalendarIcon className="w-3 h-3" /> Saved {v.savedAt?.toLocaleDateString()}
                   </p>
                   <h3 className="text-stone-200 font-serif group-hover:text-gold transition-colors text-lg italic">Verse {v.verseNumber}: {v.title}</h3>
                 </Link>
                 <form action={removeBookmark.bind(null, v.bookmarkId)}>
                   <button type="submit" className="text-stone-800 hover:text-red-500 p-2 cursor-pointer transition-colors">
-                    <Trash2 className="w-4 h-4" />
+                    <Trash2Icon className="w-4 h-4" />
                   </button>
                 </form>
               </div>
@@ -100,7 +108,7 @@ export default async function MyBookmarksPage() {
       {/* Role Upgrade Section using 'Trophy' and 'requestUpgrade' */}
       {userData.role === "READER" && (
         <div className="mt-20 p-12 rounded-2xl border border-gold/20 bg-linear-to-br from-gold/3 to-transparent relative overflow-hidden group">
-          <Trophy className="absolute top-0 right-0 p-10 opacity-[0.02] w-48 h-48 text-gold group-hover:scale-110 transition-transform duration-1000" />
+          <TrophyIcon className="absolute top-0 right-0 p-10 opacity-[0.02] w-48 h-48 text-gold group-hover:scale-110 transition-transform duration-1000" />
           <div className="relative z-10 max-w-xl">
             <h2 className="text-gold font-serif text-2xl mb-4 tracking-tight uppercase">Elevate to Contributor</h2>
             <p className="text-stone-500 text-sm mb-10 leading-relaxed text-justify">
