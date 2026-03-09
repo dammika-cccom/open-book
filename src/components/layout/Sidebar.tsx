@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import React, { useState, useEffect, useMemo, useDeferredValue } from "react";
-import { SearchIcon, XIcon, MenuIcon, BookMarkedIcon, LibraryIcon } from "../ui/Icons"; // FIXED
+import { SearchIcon, XIcon, MenuIcon, BookMarkedIcon, LibraryIcon } from "../ui/Icons";
 import { useParams } from "next/navigation";
 import dynamic from "next/dynamic";
 
@@ -16,7 +16,7 @@ interface VerseLink {
   verseNumber: number;
   title: string;
   slug: string;
-  contentHtml?: string;
+  // contentHtml removed to save bundle weight
 }
 
 interface SidebarProps {
@@ -44,12 +44,10 @@ export function Sidebar({ verses, children }: SidebarProps) {
     const term = deferredSearch.toLowerCase();
     return verses.filter((v) =>
       v.verseNumber.toString().includes(term) ||
-      v.title.toLowerCase().includes(term) ||
-      (v.contentHtml && v.contentHtml.toLowerCase().includes(term))
+      v.title.toLowerCase().includes(term)
     );
   }, [verses, deferredSearch]);
 
-  // FIX: Ensure the initial render matches the server exactly to prevent hydration errors
   if (!isMounted) {
     return (
       <aside className="fixed left-0 top-0 hidden h-screen w-72 border-r border-gold/10 bg-charcoal lg:flex flex-col overflow-hidden z-70">
@@ -82,7 +80,7 @@ export function Sidebar({ verses, children }: SidebarProps) {
 
           <Link href="/" className="group block outline-none" onClick={() => setIsOpen(false)}>
             <h1 className="text-xl font-bold tracking-tight text-gold uppercase font-serif group-hover:text-white transition-colors">The Open Book</h1>
-            <p className="text-[10px] text-stone-500 uppercase tracking-[0.3em] font-medium">Dr. S. P. de Silva</p>
+            <p className="text-[10px] text-stone-500 uppercase tracking-[0.3em]">Dr. S. P. de Silva</p>
           </Link>
 
           <Link href="/book/my-bookmarks" onClick={() => setIsOpen(false)} className="flex items-center gap-3 px-4 py-2.5 text-[10px] uppercase tracking-widest text-stone-400 hover:text-gold transition-all border border-gold/10 rounded-md bg-white/2">
@@ -93,7 +91,7 @@ export function Sidebar({ verses, children }: SidebarProps) {
             <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-700" />
             <input 
               type="text" 
-              placeholder="Search index or keywords..." 
+              placeholder="Filter index..." 
               value={searchTerm} 
               onChange={(e) => setSearchTerm(e.target.value)} 
               className="w-full bg-black/60 border border-gold/10 rounded-lg py-3 pl-10 pr-4 text-xs text-stone-300 focus:outline-none focus:border-gold/30 font-sans tracking-wide" 
@@ -115,7 +113,6 @@ export function Sidebar({ verses, children }: SidebarProps) {
                 currentSlug === v.slug ? "bg-gold/10 border-gold shadow-lg" : "border-transparent hover:bg-white/5"
               }`}
             >
-              {/* LABEL UPDATED TO: Verse XX Chapter XX */}
               <span className={`text-[10px] uppercase font-bold tracking-widest ${currentSlug === v.slug ? "text-gold" : "text-stone-500"}`}>
                 Verse {v.verseNumber} Chapter {v.verseNumber}
               </span>

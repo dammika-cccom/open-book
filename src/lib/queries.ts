@@ -3,8 +3,8 @@ import { verses, footnotes, comments, users, bookmarks } from "@/db/schema";
 import { asc, desc, eq, and, or, ilike } from "drizzle-orm";
 
 /**
- * FETCH ALL VERSES
- * Includes contentHtml to allow for local Full-Text keyword searching in the Sidebar
+ * FETCH ALL VERSES (METADATA ONLY)
+ * We removed contentHtml to keep the Cloudflare Worker under 3MB.
  */
 export async function getAllVerses() {
   try {
@@ -13,7 +13,7 @@ export async function getAllVerses() {
       verseNumber: verses.verseNumber,
       title: verses.title,
       slug: verses.slug,
-      contentHtml: verses.contentHtml, // Included for keyword filtering
+      // contentHtml removed for size optimization
     })
     .from(verses)
     .orderBy(asc(verses.verseNumber));
