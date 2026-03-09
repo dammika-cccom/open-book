@@ -4,7 +4,7 @@ import { asc, desc, eq, and, or, ilike } from "drizzle-orm";
 
 /**
  * FETCH ALL VERSES (METADATA ONLY)
- * We removed contentHtml to keep the Cloudflare Worker under 3MB.
+ * Prevents bundling 2MB of text into the Sidebar component.
  */
 export async function getAllVerses() {
   try {
@@ -13,7 +13,7 @@ export async function getAllVerses() {
       verseNumber: verses.verseNumber,
       title: verses.title,
       slug: verses.slug,
-      // contentHtml removed for size optimization
+      // contentHtml intentionally omitted to save bundle weight
     })
     .from(verses)
     .orderBy(asc(verses.verseNumber));
@@ -45,7 +45,7 @@ export async function getVerseBySlug(slug: string) {
 }
 
 /**
- * FETCH APPROVED COMMENTS FOR KNOWLEDGE BASE
+ * FETCH APPROVED COMMENTS
  */
 export async function getApprovedComments(verseId: string) {
   try {
@@ -59,12 +59,7 @@ export async function getApprovedComments(verseId: string) {
       })
       .from(comments)
       .innerJoin(users, eq(comments.userId, users.id))
-      .where(
-        and(
-          eq(comments.verseId, verseId), 
-          eq(comments.isApproved, true)
-        )
-      )
+      .where(and(eq(comments.verseId, verseId), eq(comments.isApproved, true)))
       .orderBy(desc(comments.createdAt));
   } catch (error) {
     console.error("Database Error (getApprovedComments):", error);
@@ -73,7 +68,7 @@ export async function getApprovedComments(verseId: string) {
 }
 
 /**
- * FETCH USER'S PERSONAL COMMENTS (FOR VAULT)
+ * FETCH USER VAULT CONTENT
  */
 export async function getUserComments(userId: string) {
   try {
@@ -96,9 +91,6 @@ export async function getUserComments(userId: string) {
   }
 }
 
-/**
- * FETCH USER'S BOOKMARKS (FOR VAULT)
- */
 export async function getUserBookmarks(userId: string) {
   try {
     return await db
@@ -120,7 +112,7 @@ export async function getUserBookmarks(userId: string) {
 }
 
 /**
- * GLOBAL SEARCH UTILITY (Server Side)
+ * KEYWORD SEARCH (SERVER SIDE)
  */
 export async function searchContent(query: string) {
   try {

@@ -2,12 +2,12 @@
 
 import { auth, signIn, signOut } from "@/auth";
 import { db } from "@/db";
-import { bookmarks, comments, users } from "@/db/schema"; // Added users import
+import { bookmarks, comments, users } from "@/db/schema"; 
 import { eq, and } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 /**
- * AUTHENTICATION ACTIONS
+ * AUTHENTICATION
  */
 export async function handleSignIn() {
   await signIn("google");
@@ -18,7 +18,7 @@ export async function handleSignOut() {
 }
 
 /**
- * COMMENT SECURITY ACTIONS
+ * COMMENT SECURITY
  */
 export async function submitComment(verseId: string, content: string) {
   const session = await auth();
@@ -45,7 +45,7 @@ export async function submitComment(verseId: string, content: string) {
 }
 
 /**
- * ROLE MANAGEMENT ACTIONS
+ * ROLE MANAGEMENT
  */
 export async function requestUpgrade() {
   const session = await auth();
@@ -90,7 +90,7 @@ export async function deleteComment(commentId: string) {
 }
 
 /**
- * BOOKMARK ACTIONS
+ * BOOKMARK LOGIC
  */
 export async function toggleBookmark(verseId: string) {
   const session = await auth();
@@ -113,7 +113,7 @@ export async function toggleBookmark(verseId: string) {
 
 export async function removeBookmark(bookmarkId: string) {
   const session = await auth();
-  if (!session) throw new Error("Unauthorized");
+  if (!session?.user?.id) throw new Error("Unauthorized");
   
   await db.delete(bookmarks).where(
     and(eq(bookmarks.id, bookmarkId), eq(bookmarks.userId, session.user.id))
@@ -123,13 +123,14 @@ export async function removeBookmark(bookmarkId: string) {
 
 export async function deleteUserComment(commentId: string) {
   const session = await auth();
-  if (!session) throw new Error("Unauthorized");
+  if (!session?.user?.id) throw new Error("Unauthorized");
 
   await db.delete(comments).where(
     and(eq(comments.id, commentId), eq(comments.userId, session.user.id))
   );
   revalidatePath("/book/my-bookmarks");
 }
+
 export async function toggleUserSuspension(userId: string) {
   const session = await auth();
   if (session?.user?.role !== "ADMIN") throw new Error("Admin only");

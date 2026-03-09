@@ -10,13 +10,22 @@
 //});
 
 //export const db = drizzle(pool, { schema });
+
+
+
 import { drizzle } from "drizzle-orm/neon-http";
 import { neon } from "@neondatabase/serverless";
 import * as schema from "./schema";
 
-const connectionString = process.env.DATABASE_URL!;
+/**
+ * PRODUCTION-GRADE DB INDEX
+ * Strictly uses neon-http to fit within the 3MB Cloudflare limit.
+ */
 
-// The neon client handles the connection via HTTP, which is very light for the Edge
-const client = neon(connectionString);
+if (!process.env.DATABASE_URL) {
+  throw new Error("❌ DATABASE_URL is missing from environment variables");
+}
+
+const client = neon(process.env.DATABASE_URL);
 
 export const db = drizzle(client, { schema });

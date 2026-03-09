@@ -3,14 +3,25 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   output: 'standalone',
   images: { unoptimized: true },
-  productionBrowserSourceMaps: false, // Saves space
+  productionBrowserSourceMaps: false,
   
-  // Requirement: Ensure Node modules are 100% excluded
-  serverExternalPackages: ['pg', 'dotenv', 'fs', 'path', 'ws', 'sanitize-html'],
-  
+  // Requirement: Block these giants from ever entering the Worker code
+  serverExternalPackages: [
+    'pg', 
+    'dotenv', 
+    'fs', 
+    'path', 
+    'ws', 
+    'sanitize-html', 
+    'lucide-react'
+  ],
+
   experimental: {
-    // This removes unused code paths in Next 16
-    optimizePackageImports: ['lucide-react', 'lucide'],
+    // Force the compiler to discard unused code paths
+    optimizePackageImports: [
+      '@neondatabase/serverless',
+      'drizzle-orm'
+    ],
   }
 };
 
