@@ -14,7 +14,7 @@ export async function GET() {
     { src: "/images/gallery/home7.jpg", caption: "Dr. S. P. de Silva home in Borella" },
     { src: "/images/gallery/home8.jpg", caption: "Dr. S. P. de Silva home in Borella" },
     { src: "/images/gallery/home9.jpg", caption: "Dr. S. P. de Silva home in Borella" },
-    { src: "/images/gallery/the open book.jpg", caption: "The Open Book" }
+    { src: "/images/gallery/The Open Book.jpg", caption: "The Open Book" }
   ];
 
   return NextResponse.json(images);

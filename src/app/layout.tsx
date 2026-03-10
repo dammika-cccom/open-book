@@ -5,8 +5,11 @@ import { GlobalTools } from "@/components/layout/GlobalTools";
 import Script from "next/script";
 
 export const metadata: Metadata = {
-  title: "The Open Book | Science of Buddhism",
-  description: "A scientific rationalization of Buddhism by Dr. S. P. de Silva",
+  title: "The Open Book | Dr. S. P. de Silva",
+  description: "A scientific rationalization of Buddhism through 50 verses of truth.",
+  icons: {
+    icon: "/icon.png", // Next.js usually finds this automatically, but explicitly defining it is safer
+  },
 };
 
 export default function RootLayout({
