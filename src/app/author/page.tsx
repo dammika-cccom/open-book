@@ -13,7 +13,7 @@ import { SocialShare } from "@/components/ui/SocialShare";
 
 export default function AuthorPage() {
   return (
-    <main className="min-h-screen bg-obsidian pb-32">
+    <main className="min-h-screen bg-obsidian pb-16">
       <IPProtector>
         {/* Requirement #4: Hero space for Author Image */}
         <div className="relative h-[55vh] w-full flex items-center justify-center overflow-hidden border-b border-gold/10">
@@ -38,7 +38,7 @@ export default function AuthorPage() {
 
         <div className="max-w-5xl mx-auto px-6 -mt-6 relative z-20">
           <Link href="/" className="inline-flex items-center text-gold text-[10px] uppercase tracking-[0.3em] hover:text-white mb-20 transition-all border border-gold/20 px-6 py-2.5 rounded-full bg-obsidian shadow-2xl">
-            <MoveLeftIcon className="mr-3 w-3.5 h-3.5" /> Library Home
+            <MoveLeftIcon className="mr-3 w-3.5 h-3.5" /> The open book Home
           </Link>
 
           <div className="grid lg:grid-cols-[1fr_1.8fr] gap-12 lg:gap-24 items-start">
@@ -46,7 +46,7 @@ export default function AuthorPage() {
             <aside className="space-y-12 lg:sticky lg:top-12">
               <div className="space-y-2">
                 <h1 className="text-5xl font-serif text-gold leading-tight tracking-tighter">Dr. S. P. de Silva</h1>
-                <p className="text-stone-600 text-[10px] uppercase tracking-[0.4em] font-black">Sri Lanka | 1931 — 2024</p>
+                <p className="text-stone-600 text-[10px] uppercase tracking-[0.4em] font-black">Sri Lanka | 1931 — 2004</p>
               </div>
 
               <div className="space-y-8">
@@ -103,7 +103,6 @@ export default function AuthorPage() {
               </div>
             </section>
           </div>
-
           {/* Requirement #4: Integrated Gallery */}
           <HeritageGallery />
         </div>
